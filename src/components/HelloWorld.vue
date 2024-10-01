@@ -123,8 +123,8 @@ function updateStore(newData: any) {
     <div>
       <!-- <form action="" class="search-bar"> -->
       <input v-model="searchString" placeholder="Search">
-      <button class="enter" @click="fetchData">Enter</button>
-      <button @click="clearResults">Clear Results</button>
+      <button class="enter" @click="fetchData">Search</button>
+      <button class="reset" @click="clearResults">Clear Results</button>
 
       <!-- </form> -->
     </div>
@@ -136,7 +136,7 @@ function updateStore(newData: any) {
     <div class="section-filters">
       <div class="filters">
         <div class="genre-filter">
-          <h2>Genre</h2>
+          <h2 class="head-cata">Genre</h2>
           <label>
             <input type="checkbox" value="Drama" v-model="selectedCategories" /> Drama
           </label>
@@ -152,7 +152,7 @@ function updateStore(newData: any) {
         </div>
 
         <div class="form-filter">
-          <h2>Form</h2>
+          <h2 class="head-cata">Form</h2>
           <label>
             <input type="checkbox" value="Poster" v-model="selectedCategories" /> Poster
           </label>
@@ -195,15 +195,34 @@ img {
 }
 
 ul {
+  padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+li {
+  max-width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #ffffff33;
+  justify-content: center;
+}
+
+p.title {
+  color: #fff;
 }
 
 h1 {
   font-weight: 500;
   font-size: 2rem;
   position: relative;
+  color: #fff;
+}
+
+.head-cata {
+  color: #fff;
 }
 
 h3 {
@@ -219,7 +238,7 @@ h3 {
 
   .search h1,
   .search h3 {
-    text-align: left;
+    text-align: center;
   }
 }
 
@@ -240,6 +259,28 @@ input {
 .filters {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding-top: 10px;
+  padding-bottom: 2rem;
+}
 
+.enter {
+  margin-top: 5px;
+  border-radius: 25px;
+  padding: 5px 10px;
+  flex: 1;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.reset {
+  margin-left: 30rem;
+  display: inline-block;
+  border-radius: 25px;
+  padding: 5px 10px;
+  flex: 1;
+  border: 0;
+  outline: none;
+  cursor: pointer;
 }
 </style>
