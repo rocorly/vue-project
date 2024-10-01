@@ -1,4 +1,7 @@
 @import './base.css';
+* {
+  box-sizing: border-box;
+}
 
 #app {
   max-width: 1280px;
@@ -8,11 +11,13 @@
 }
 
 a,
-.green {
+.heading {
+  margin-left: 150px;
+  margin-right: 150px;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  font-size: 24px;
+  color: rgb(206, 206, 206);
   transition: 0.4s;
-  padding: 3px;
 }
 
 @media (hover: hover) {
@@ -23,13 +28,12 @@ a,
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
-    place-items: center;
+    display: block;
+    margin: 2vh;
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: block;
     padding: 0 2rem;
   }
 }

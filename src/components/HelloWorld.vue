@@ -1,4 +1,5 @@
 <script lang="ts">
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -13,8 +14,34 @@ export default {
       currentPage: 1,
       total: 0,
       imgURL: 'https://media.nfsacollection.net/',
-      query: 'https://api.collection.nfsa.gov.au/search?limit=25&query=',
-      searchString: 'lobby'
+      query: 'https://api.collection.nfsa.gov.au/search?limit=25&hasMedia=yes&query=',
+      searchString: 'film poster',
+      defaultsearchString: 'film poster',
+      selectedCategories: []
+    }
+  },
+  mounted() {
+    this.fetchData()
+    // If there's already results, show them
+    if (store) {
+      this.resultSet = store.theStoredData
+    } else {
+      this.resultSet = []
+    }
+  },
+  computed: {
+    filteredItems() {
+      if (this.selectedCategories.length === 0) {
+        return this.resultSet // Return all items if no category is selected
+      }
+      return this.resultSet.filter(
+        (item) =>
+          (item['forms'] && this.selectedCategories.includes(item['forms'][0])) ||
+          (item['countries'] && this.selectedCategories.includes(item['countries'][0])) ||
+          (item['parentTitle'] &&
+            item['parentTitle']['genres'] &&
+            this.selectedCategories.includes(item['parentTitle']['genres'][0]))
+      )
     }
   },
   methods: {
@@ -22,6 +49,9 @@ export default {
       // use dynamic data to modify the API call
       // in this case we use a text box which sets searchString
       // and the currentPage to allow us to loop through the paginated results
+      if (this.searchString == '') {
+        this.searchString = this.defaultsearchString
+      }
       let queryString = this.query + this.searchString + '&page=' + this.currentPage
       console.log('API call: ' + queryString)
       fetch(queryString)
@@ -44,12 +74,14 @@ export default {
               } else {
                 this.$data.theData = this.$data.tempData
                 this.$data.tempData = {}
+                console.log(this.$data.resultSet)
                 this.$data.resultSet = this.$data.tempResultSet
                 this.$data.tempResultSet = []
                 // all items loaded, reset page, ready for next query
                 this.currentPage = 1
                 console.log('Pages: ' + Math.ceil(this.$data.total / 25))
                 console.log('finished')
+                updateStore(this.$data.resultSet)
               }
             } else {
               console.log('no results')
@@ -62,30 +94,68 @@ export default {
     }
   }
 }
+
+// Use a Pinia store to hold the API results through the whole app
+// Access the data by importing the store
+import { useSearchDataStore } from '@/stores/searchData'
+var store: any
+function updateStore(newData: any) {
+  // Define a variable to represent the store
+  store = useSearchDataStore()
+  // Then use store.theStoredData to get/set the collection
+  store.theStoredData = newData
+  return {
+    theStoredData: store.theStoredData
+  }
+}
+
+
 </script>
 
 <template>
   <div class="search">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="heading">{{ msg }}</h1>
 
-    <input v-model="searchString" placeholder="query" />
-    <button @click="fetchData">fetch data</button>
+    <div>
+      <!-- <form action="" class="search-bar"> -->
+      <input v-model="searchString" placeholder="Search">
+      <button @click="fetchData">button</button>
+
+      <!-- </form> -->
+    </div>
 
     <p>Total: {{ total }}</p>
+
+    <p>Filter Items with Checkboxes</p>
+    <div>
+      <label>
+        <input type="checkbox" value="Poster" v-model="selectedCategories" /> Poster
+      </label>
+      <label>
+        <input type="checkbox" value="Still Image" v-model="selectedCategories" /> Still Image
+      </label>
+      <label>
+        <input type="checkbox" value="Documentary" v-model="selectedCategories" /> Documentary
+      </label>
+    </div>
 
     <ul role="list" class="list-v">
       <!-- create a variable called result, 
       loop through the API results and add a list item for each result.
       Use result to access properties like 'title' and 'name' -->
-      <li v-for="(result, index) in resultSet" :key="result[index]">
-        <p>{{ result['title'] }}</p>
+      <li v-for="(result, index) in filteredItems" :key="result[index]">
+        <!-- <li v-for="(result, index) in resultSet" :key="result[index]"> -->
+        <p class="title">{{ result['title'] }}</p>
         <p>{{ result['name'] }}</p>
         <!-- check if there's any items in the preview array.  If so, put the biggest image in the view -->
         <!-- v-bind is used to update the src attribute when the data comes in -->
-        <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
-          v-bind:alt="result['name']" v-bind:title="result['name']" />
+        <Transition>
+          <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
+            v-bind:alt="result['name']" v-bind:title="result['name']" />
+        </Transition>
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -103,9 +173,8 @@ ul {
 
 h1 {
   font-weight: 500;
-  font-size: 2.6rem;
+  font-size: 2rem;
   position: relative;
-  top: -10px;
 }
 
 h3 {
@@ -123,5 +192,19 @@ h3 {
   .search h3 {
     text-align: left;
   }
+}
+
+input {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 50px;
+  padding: 10px 20px;
+  flex: 1;
+  border: 0;
+  outline: none;
 }
 </style>

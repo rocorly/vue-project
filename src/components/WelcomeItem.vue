@@ -7,7 +7,7 @@
       <h3>
         <slot name="heading"></slot>
       </h3>
-      <slot></slot>
+
     </div>
   </div>
 </template>
@@ -44,6 +44,7 @@ h3 {
 @media (min-width: 1024px) {
   .item {
     margin-top: 0;
+    place-items: flex-start;
     padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
   }
 
