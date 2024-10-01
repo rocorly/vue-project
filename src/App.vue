@@ -51,6 +51,7 @@ nav a:first-of-type {
     place-items: center;
     align-items: flex-start;
     justify-content: space-around;
+    padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {

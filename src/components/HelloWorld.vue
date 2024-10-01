@@ -191,7 +191,7 @@ function updateStore(newData: any) {
 <style scoped>
 img {
   display: inline-block;
-  max-width: 200px;
+  max-width: 100%;
 }
 
 ul {
@@ -208,6 +208,10 @@ li {
   padding: 0.5rem;
   border: 1px solid #ffffff33;
   justify-content: center;
+}
+
+li img {
+  margin-top: 10px;
 }
 
 p.title {
