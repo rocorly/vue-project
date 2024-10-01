@@ -91,9 +91,13 @@ export default {
         .catch((err) => {
           console.error(err)
         })
+    },
+    clearResults() {
+      this.$data.resultSet = []
     }
   }
 }
+
 
 // Use a Pinia store to hold the API results through the whole app
 // Access the data by importing the store
@@ -119,7 +123,8 @@ function updateStore(newData: any) {
     <div>
       <!-- <form action="" class="search-bar"> -->
       <input v-model="searchString" placeholder="Search">
-      <button @click="fetchData">button</button>
+      <button class="enter" @click="fetchData">Enter</button>
+      <button @click="clearResults">Clear Results</button>
 
       <!-- </form> -->
     </div>
@@ -127,36 +132,60 @@ function updateStore(newData: any) {
     <p>Total: {{ total }}</p>
 
     <p>Filter Items with Checkboxes</p>
-    <div>
-      <label>
-        <input type="checkbox" value="Poster" v-model="selectedCategories" /> Poster
-      </label>
-      <label>
-        <input type="checkbox" value="Still Image" v-model="selectedCategories" /> Still Image
-      </label>
-      <label>
-        <input type="checkbox" value="Documentary" v-model="selectedCategories" /> Documentary
-      </label>
+
+    <div class="section-filters">
+      <div class="filters">
+        <div class="genre-filter">
+          <h2>Genre</h2>
+          <label>
+            <input type="checkbox" value="Drama" v-model="selectedCategories" /> Drama
+          </label>
+          <label>
+            <input type="checkbox" value="Comedy" v-model="selectedCategories" /> Comedy
+          </label>
+          <label>
+            <input type="checkbox" value="Adventure" v-model="selectedCategories" /> Adventure
+          </label>
+          <label>
+            <input type="checkbox" value="Indigenous as subject" v-model="selectedCategories" /> Indigineous
+          </label>
+        </div>
+
+        <div class="form-filter">
+          <h2>Form</h2>
+          <label>
+            <input type="checkbox" value="Poster" v-model="selectedCategories" /> Poster
+          </label>
+          <label>
+            <input type="checkbox" value="Still Image" v-model="selectedCategories" /> Still Image
+          </label>
+          <label>
+            <input type="checkbox" value="Lobby Card" v-model="selectedCategories" /> Lobby Card
+          </label>
+        </div>
+      </div>
     </div>
 
-    <ul role="list" class="list-v">
-      <!-- create a variable called result, 
+  </div>
+
+  <ul role="list" class="list-v">
+    <!-- create a variable called result, 
       loop through the API results and add a list item for each result.
       Use result to access properties like 'title' and 'name' -->
-      <li v-for="(result, index) in filteredItems" :key="result[index]">
-        <!-- <li v-for="(result, index) in resultSet" :key="result[index]"> -->
-        <p class="title">{{ result['title'] }}</p>
-        <p>{{ result['name'] }}</p>
-        <!-- check if there's any items in the preview array.  If so, put the biggest image in the view -->
-        <!-- v-bind is used to update the src attribute when the data comes in -->
-        <Transition>
-          <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
-            v-bind:alt="result['name']" v-bind:title="result['name']" />
-        </Transition>
-      </li>
-    </ul>
+    <li v-for="(result, index) in filteredItems" :key="result[index]">
+      <!-- <li v-for="(result, index) in resultSet" :key="result[index]"> -->
+      <p class="title">{{ result['title'] }}</p>
+      <p>{{ result['name'] }}</p>
+      <!-- check if there's any items in the preview array.  If so, put the biggest image in the view -->
+      <!-- v-bind is used to update the src attribute when the data comes in -->
+      <Transition>
+        <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
+          v-bind:alt="result['name']" v-bind:title="result['name']" />
+      </Transition>
+    </li>
+  </ul>
 
-  </div>
+
 </template>
 
 <style scoped>
@@ -206,5 +235,11 @@ input {
   flex: 1;
   border: 0;
   outline: none;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
 }
 </style>
