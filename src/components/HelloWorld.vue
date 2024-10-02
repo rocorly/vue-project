@@ -113,7 +113,6 @@ function updateStore(newData: any) {
   }
 }
 
-
 </script>
 
 <template>
@@ -168,7 +167,6 @@ function updateStore(newData: any) {
         </div>
       </div>
     </div>
-
   </div>
 
   <ul role="list" class="list-v">
@@ -183,11 +181,10 @@ function updateStore(newData: any) {
       <!-- v-bind is used to update the src attribute when the data comes in -->
       <Transition>
         <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
-          v-bind:alt="result['name']" v-bind:title="result['name']" />
+          v-bind:alt="result['name']" v-bind:title="result['name']">
       </Transition>
     </li>
   </ul>
-
 
 </template>
 
@@ -239,6 +236,69 @@ h3 {
 .search h1,
 .search h3 {
   text-align: center;
+}
+
+.search-bar {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 50px;
+  flex: 1;
+  border: 0;
+  outline: none;
+}
+
+input {
+  cursor: pointer;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 50px;
+  padding: 10px 20px;
+  flex: 0;
+  border: 0;
+  outline: none;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 10px;
+  padding-bottom: 2rem;
+}
+
+.enter {
+  margin-top: 5px;
+  border-radius: 25px;
+  padding: 5px 10px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.bttn {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.reset {
+  margin-top: 5px;
+  display: inline-block;
+  border-radius: 25px;
+  padding: 5px 10px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
 }
 
 @media (max-width: 1023px) {
@@ -313,8 +373,6 @@ h3 {
 
 }
 
-@media (max-width:375px) {}
-
 @media (max-width: 320px) {
   .heading {
     font-size: 20px;
@@ -329,68 +387,5 @@ h3 {
     margin-left: -0.5vh;
     grid-column: auto;
   }
-}
-
-
-.search-bar {
-  max-width: 1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  border-radius: 50px;
-  flex: 1;
-  border: 0;
-  outline: none;
-}
-
-input {
-  width: 100%;
-  max-width: 1000px;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 50px;
-  padding: 10px 20px;
-  flex: 0;
-  border: 0;
-  outline: none;
-}
-
-label {
-  display: flex;
-  justify-content: space-between;
-}
-
-.filters {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr 1fr;
-  padding-top: 10px;
-  padding-bottom: 2rem;
-}
-
-.enter {
-  margin-top: 5px;
-  border-radius: 25px;
-  padding: 5px 10px;
-  border: 0;
-  outline: none;
-  cursor: pointer;
-}
-
-.bttn {
-  display: flex;
-  justify-content: space-between;
-}
-
-
-.reset {
-  margin-top: 5px;
-  display: inline-block;
-  border-radius: 25px;
-  padding: 5px 10px;
-  border: 0;
-  outline: none;
-  cursor: pointer;
 }
 </style>
