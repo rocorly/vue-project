@@ -122,9 +122,12 @@ function updateStore(newData: any) {
 
     <div>
       <!-- <form action="" class="search-bar"> -->
-      <input v-model="searchString" placeholder="Search">
-      <button class="enter" @click="fetchData">Search</button>
-      <button class="reset" @click="clearResults">Clear Results</button>
+      <input class="search-bar" v-model="searchString" placeholder="Search">
+      <div class="bttn">
+        <button class="enter" @click="fetchData">Search</button>
+        <button class="reset" @click="clearResults">Clear Results</button>
+      </div>
+
 
       <!-- </form> -->
     </div>
@@ -138,29 +141,29 @@ function updateStore(newData: any) {
         <div class="genre-filter">
           <h2 class="head-cata">Genre</h2>
           <label>
-            <input type="checkbox" value="Drama" v-model="selectedCategories" /> Drama
+            Drama <input type="checkbox" value="Drama" v-model="selectedCategories" />
           </label>
           <label>
-            <input type="checkbox" value="Comedy" v-model="selectedCategories" /> Comedy
+            Comedy <input type="checkbox" value="Comedy" v-model="selectedCategories" />
           </label>
           <label>
-            <input type="checkbox" value="Adventure" v-model="selectedCategories" /> Adventure
+            Adventure <input type="checkbox" value="Adventure" v-model="selectedCategories" />
           </label>
           <label>
-            <input type="checkbox" value="Indigenous as subject" v-model="selectedCategories" /> Indigineous
+            Indigineous <input type="checkbox" value="Indigenous as subject" v-model="selectedCategories" />
           </label>
         </div>
 
         <div class="form-filter">
           <h2 class="head-cata">Form</h2>
           <label>
-            <input type="checkbox" value="Poster" v-model="selectedCategories" /> Poster
+            Poster <input type="checkbox" value="Poster" v-model="selectedCategories" />
           </label>
           <label>
-            <input type="checkbox" value="Still Image" v-model="selectedCategories" /> Still Image
+            Still Image <input type="checkbox" value="Still Image" v-model="selectedCategories" />
           </label>
           <label>
-            <input type="checkbox" value="Lobby Card" v-model="selectedCategories" /> Lobby Card
+            Lobby Card <input type="checkbox" value="Lobby Card" v-model="selectedCategories" />
           </label>
         </div>
       </div>
@@ -238,7 +241,11 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1023px) {
+  .search {
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
 
   .search h1,
   .search h3 {
@@ -246,22 +253,117 @@ h3 {
   }
 }
 
-input {
-  width: 100%;
+@media (max-width:817px) {
+  .heading {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width:753px) {
+  .heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search {
+    margin-left: 6rem;
+    margin-right: 6rem;
+  }
+
+  .reset {
+    margin-left: 10px;
+  }
+}
+
+
+@media (max-width: 485px) {
+  .heading {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .search {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .filters {
+    margin-left: 1vh;
+  }
+
+  .reset,
+  .enter {
+    font-size: 12px;
+  }
+
+  .heading {
+    font-size: 28px;
+  }
+
+  .head-cata {
+    font-size: 18px;
+  }
+
+  p,
+  label {
+    font-size: 12px;
+  }
+
+}
+
+@media (max-width:375px) {}
+
+@media (max-width: 320px) {
+  .heading {
+    font-size: 20px;
+  }
+
+  .search-bar {
+    border-radius: 25px;
+    padding: 5px 10px;
+  }
+
+  .filters {
+    margin-left: -0.5vh;
+    grid-column: auto;
+  }
+}
+
+
+.search-bar {
   max-width: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
   border-radius: 50px;
-  padding: 10px 20px;
   flex: 1;
   border: 0;
   outline: none;
 }
 
+input {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 50px;
+  padding: 10px 20px;
+  flex: 0;
+  border: 0;
+  outline: none;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+}
+
 .filters {
   display: grid;
+  gap: 20px;
   grid-template-columns: 1fr 1fr;
   padding-top: 10px;
   padding-bottom: 2rem;
@@ -271,18 +373,22 @@ input {
   margin-top: 5px;
   border-radius: 25px;
   padding: 5px 10px;
-  flex: 1;
   border: 0;
   outline: none;
   cursor: pointer;
 }
 
+.bttn {
+  display: flex;
+  justify-content: space-between;
+}
+
+
 .reset {
-  margin-left: 30rem;
+  margin-top: 5px;
   display: inline-block;
   border-radius: 25px;
   padding: 5px 10px;
-  flex: 1;
   border: 0;
   outline: none;
   cursor: pointer;
