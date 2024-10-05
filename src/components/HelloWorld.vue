@@ -98,7 +98,6 @@ export default {
   }
 }
 
-
 // Use a Pinia store to hold the API results through the whole app
 // Access the data by importing the store
 import { useSearchDataStore } from '@/stores/searchData'
@@ -181,11 +180,10 @@ function updateStore(newData: any) {
       <!-- v-bind is used to update the src attribute when the data comes in -->
       <Transition>
         <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
-          v-bind:alt="result['name']" v-bind:title="result['name']">
+          v-bind:alt="result['name']" v-bind:title="result['name']" class="gallery-image">
       </Transition>
     </li>
   </ul>
-
 </template>
 
 <style scoped>
@@ -300,6 +298,8 @@ label {
   outline: none;
   cursor: pointer;
 }
+
+
 
 @media (max-width: 1023px) {
   .search {
