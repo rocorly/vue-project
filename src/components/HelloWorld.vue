@@ -180,7 +180,7 @@ function updateStore(newData: any) {
       <!-- v-bind is used to update the src attribute when the data comes in -->
       <Transition>
         <img v-if="result['preview'] && result['preview'][0]" v-bind:src="imgURL + result['preview'][0]['filePath']"
-          v-bind:alt="result['name']" v-bind:title="result['name']" class="gallery-image">
+          v-bind:alt="result['name']" v-bind:title="result['name']">
       </Transition>
     </li>
   </ul>
