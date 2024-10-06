@@ -14,10 +14,10 @@ Reflection
 
 Whilst the cite is completely functional, I would have liked to add some additional interaction, specifically around the image gallery. Addition of a lightbox function would enhance the user experience by adding additional functionality and interactability. Additionally, the clear results function could reset the filters, which would streamline the functionality of the app. Further implementing components, into the site may also allow for additional functions without requiring a separate web page, inclusion of a search function with greater capabilities. With more options such as place of origin, language and dropdown functions giving access to all filter tags shown as options on the sidebar of the NFSA site. The API elements and JavaScript have been written with the support of the material given in the tutorials. Whilst some CSS layout and formatting have been supported by W3schools and YouTube.
 
-Vue (2022). Introduction | Vue.js. [online] vuejs.org. Available at: https://vuejs.org/guide/introduction.html.
-VueJS (n.d.). Component v-model | Vue.js. [online] vuejs.org. Available at: https://vuejs.org/guide/components/v-model.html.
-VueJS (2014). Vue.js. [online] Vuejs.org. Available at: https://vuejs.org/guide/essentials/forms.
-w3schools (n.d.). Vue Tutorial. [online] www.w3schools.com. Available at: https://www.w3schools.com/vue/index.php.
+Vue. (2022). Introduction | Vue.js. Vuejs.org. https://vuejs.org/guide/introduction.html
+VueJS. (n.d.). Component v-model | Vue.js. Vuejs.org. https://vuejs.org/guide/components/v-model.html
+VueJS. (2014). Vue.js. Vuejs.org. https://vuejs.org/guide/essentials/forms
+w3schools. (n.d.). Vue Tutorial. Www.w3schools.com. https://www.w3schools.com/vue/index.php
 
 <!-- # vue-project
 
